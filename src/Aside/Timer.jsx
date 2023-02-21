@@ -22,7 +22,6 @@ export default function Timer({gameOver, returnTimer, resetTimer}) {
 
     useEffect(() => {
       if(gameOver) {
-          console.log(time)
           returnTimer(time, getTime(time))
           resetTimer(false)
       }

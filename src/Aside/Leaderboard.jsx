@@ -1,11 +1,10 @@
 import React from 'react'
 
 export default function Leaderboard({name, time, leaderboard}) {
-    console.log(leaderboard)
   return (
     <div
     className='leaderboard-container'
-    >Leaderboard
+    >U Leaderboard
     <div
     className='leaderboard'
     >

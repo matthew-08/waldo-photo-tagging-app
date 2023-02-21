@@ -26,7 +26,6 @@ const querySnapshot = async () => {
 
 }
 querySnapshot()
-/* setCoordonates({xmin: 29, xmax: 30, ymin: 63, ymax: 66}, "Character 1") */
 
 const getLeaderboard = async () => {
   const docref = doc(db, 'winners', 'winners')
@@ -69,14 +68,10 @@ function App() {
 
 const container = useRef()
 
-useEffect(() => {
-  console.log(leftRight)
-}, [leftRight])
 
 const handleUserGuess = (character) => {
     const checkGuess = (xmin, xmax, ymin, ymax) => {
         const [userX, userY] = userClick
-        console.log(userX, userY)
         if(userX >= xmin 
           && userX <= xmax
           && userY >= ymin
@@ -88,7 +83,6 @@ const handleUserGuess = (character) => {
               }
               return c
             }))
-            console.log(foundCharacters)
           }
     return setShowMenu(false)
     }
@@ -96,20 +90,15 @@ const handleUserGuess = (character) => {
     querySnapshot().then(res => {
       return res.filter(c => c.character === character)[0]
     }).then(c => {
-      console.log(c)
       const {xmin, xmax, ymin, ymax} = c
       checkGuess(xmin, xmax, ymin, ymax)
     })
     
-    console.log(character)
 }
 
 const checkClick = (e) => {
     const element = e.target
-    /* console.log(element)
-    console.log(element.parentElement)
-    console.log(container.current) */
-    console.log(element)
+
     if(container.current.contains(element) && !element.closest('.menu')) {
         setShowMenu(prev => !prev)  
         setLeftRight([e.clientX, e.clientY])
@@ -122,7 +111,6 @@ const checkClick = (e) => {
         const percentageY = Math.floor((y / container.current.offsetHeight) * 100)
         
         setUserClick([percentageX, percentageY])
-        console.log(menuRef)
         
       }
       else return null
@@ -135,7 +123,6 @@ const checkClick = (e) => {
 
 //character 1 {xmin = 29, xmax = 30, ymin = 63, ymax = 66}
 const handleClick = (e) => {
-  console.log(gameOver)
   if (gameOver === false) {
   checkClick(e) 
   } else {
@@ -192,7 +179,6 @@ useEffect(() => {
         return a.time - b.time
     })
 
-    console.log(adjustTimes)
   
     const finalResults = adjustTimes.map((u) => {
       return(
@@ -201,7 +187,6 @@ useEffect(() => {
     }
     )
 
-    console.log(finalResults)
     setLeadboard(finalResults)
   })
 
